@@ -31,6 +31,8 @@ import {
   ChevronRight,
   Folder,
   CircleCheck,
+  MessageCircle,
+  Sparkles,
 } from 'lucide-react';
 
 function GithubIcon({ size = 18, className = '' }: { size?: number; className?: string }) {
@@ -43,7 +45,7 @@ function GithubIcon({ size = 18, className = '' }: { size?: number; className?: 
 
 const GITHUB_URL = 'https://github.com/JonamMadeda/nukuzaa';
 const DOWNLOAD_URL = 'https://github.com/JonamMadeda/nukuzaa/releases';
-const VERSION = 'v0.1.0';
+const VERSION = 'v0.4.0';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -86,6 +88,7 @@ function Navbar() {
         <div className="hidden items-center gap-8 md:flex">
           {[
             ['Features', '#features'],
+            ['AI', '#ai'],
             ['How It Works', '#how'],
             ['Reader', '#reader'],
             ['Download', '#download'],
@@ -130,6 +133,7 @@ function Navbar() {
           <div className="flex flex-col gap-3">
             {[
               ['Features', '#features'],
+              ['AI', '#ai'],
               ['How It Works', '#how'],
               ['Reader', '#reader'],
               ['Download', '#download'],
@@ -233,6 +237,33 @@ function HeroMock() {
                   <div className="flex gap-2"><span className="text-cyan-700">[00:00]</span><span className="truncate text-zinc-600">Intro — why transcripts win</span></div>
                   <div className="flex gap-2 rounded bg-white px-1 py-0.5 shadow-sm"><span className="text-cyan-700">[02:31]</span><span className="truncate text-zinc-800">Learning rates & divergence</span></div>
                   <div className="flex gap-2"><span className="text-cyan-700">[06:45]</span><span className="truncate text-zinc-600">MLPs to transformers</span></div>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-3 grid gap-3 sm:grid-cols-2">
+              <div className="rounded-lg border border-yellow-500/30 bg-yellow-50/70 p-3">
+                <div className="mb-2 flex items-center gap-1.5 text-[11px] font-semibold text-yellow-700">
+                  <Sparkles size={12} aria-hidden="true" /> AI Summary — TL;DR
+                </div>
+                <p className="text-xs leading-relaxed text-zinc-700">
+                  Backprop carries gradients backward through each layer; learning rates decide step size…
+                </p>
+                <div className="mt-2 flex flex-wrap gap-1">
+                  {['Key points', 'Takeaways', 'Quotes'].map((c) => (
+                    <span key={c} className="rounded-full border border-yellow-500/30 bg-white px-2 py-0.5 text-[10px] font-medium text-yellow-700">{c}</span>
+                  ))}
+                </div>
+              </div>
+              <div className="rounded-lg border border-cyan-600/20 bg-cyan-50/60 p-3">
+                <div className="mb-2 flex items-center gap-1.5 text-[11px] font-semibold text-cyan-700">
+                  <MessageCircle size={12} aria-hidden="true" /> Ask this video
+                </div>
+                <div className="ml-auto w-fit max-w-[90%] rounded-lg rounded-br-sm bg-zinc-900 px-2 py-1.5 text-[11px] text-white">
+                  Why do models diverge?
+                </div>
+                <div className="mt-1.5 rounded-lg rounded-bl-sm border border-black/10 bg-white px-2 py-1.5 text-[11px] leading-relaxed text-zinc-700">
+                  Learning rates too high overshoot the minimum… <span className="rounded bg-cyan-100 px-1 py-0.5 font-mono text-[10px] font-semibold text-cyan-800">[02:31]</span>
                 </div>
               </div>
             </div>
@@ -374,10 +405,10 @@ export default function App() {
               <span className="text-cyan-700">Auto-Update Enabled</span>
             </a>
             <h1 className="mt-6 text-4xl font-extrabold leading-[1.05] tracking-tight text-zinc-900 sm:text-6xl">
-              Transform <span className="text-gradient-red">YouTube Knowledge</span> into <span className="text-gradient-cyan">Organized Text</span> Collections.
+              Every video, <span className="text-gradient-red">Summarized.</span> Every question, <span className="text-gradient-cyan">Answered.</span>
             </h1>
             <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-zinc-600 sm:text-lg">
-              Nukuzaa extracts full transcripts from any YouTube link in seconds — bypassing CORS and server blocks with local execution — then organizes them into clean, searchable folder vaults synced to the cloud.
+              Nukuzaa extracts full transcripts from any YouTube link in seconds — then writes a comprehensive AI summary (TL;DR, key points, takeaways, quotes) and lets you chat with the video, every answer grounded in the transcript with clickable timestamps.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a
@@ -429,8 +460,10 @@ export default function App() {
           <h2 id="features-heading" className="mx-auto max-w-2xl text-3xl font-bold tracking-tight text-zinc-900 sm:text-4xl">Everything you need to keep YouTube knowledge.</h2>
           <p className="mx-auto mt-3 max-w-xl text-zinc-600">Built for speed, organization, and portability.</p>
         </motion.div>
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
           {[
+            { icon: Sparkles, tint: 'bg-yellow-50 text-yellow-700 border-yellow-200', title: 'AI Video Summaries', body: 'TL;DR, every key point, topics in order, actionable takeaways & notable quotes — generated per video and cached for instant re-reads.' },
+            { icon: MessageCircle, tint: 'bg-cyan-50 text-cyan-700 border-cyan-100', title: 'Ask This Video', body: 'Chat with any transcript. Answers stream live, cite exact [MM:SS] moments, and link straight back to the video.' },
             { icon: Link2, tint: 'bg-yellow-50 text-yellow-700 border-yellow-200', title: 'One-Paste Import', body: 'Handles watch links, Shorts, embeds & live streams. Local execution means no IP bans, ever.' },
             { icon: FolderKanban, tint: 'bg-amber-50 text-amber-600 border-amber-100', title: 'Smart Folders', body: 'Categorize transcripts into custom collections with counts, insights & instant search.' },
             { icon: Captions, tint: 'bg-cyan-50 text-cyan-700 border-cyan-100', title: 'Paragraph vs. Timestamp Reader', body: 'Switch between clean flowing paragraphs or precise MM:SS timestamp view in one click.' },
@@ -455,6 +488,100 @@ export default function App() {
         </div>
       </section>
 
+      {/* AI */}
+      <section id="ai" className="mx-auto max-w-7xl scroll-mt-20 bg-white px-4 py-20 sm:px-6 lg:px-8" aria-labelledby="ai-heading">
+        <motion.div initial="hidden" whileInView="show" viewport={{ once: true, margin: '-80px' }} variants={fadeUp} transition={{ duration: 0.6 }} className="text-center">
+          <span className="inline-block rounded-full border border-yellow-500/30 bg-yellow-50 px-3 py-1 text-xs font-semibold text-yellow-700">AI-first</span>
+          <h2 id="ai-heading" className="mx-auto mt-4 max-w-2xl text-3xl font-bold tracking-tight text-zinc-900 sm:text-4xl">Don&apos;t watch it. Ask it.</h2>
+          <p className="mx-auto mt-3 max-w-xl text-zinc-600">Two AI views grounded in the transcript — never invented, always cited with timestamps.</p>
+        </motion.div>
+
+        <div className="mt-10 grid gap-5 lg:grid-cols-2">
+          {/* AI Summary panel */}
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: '-60px' }}
+            variants={fadeUp}
+            transition={{ duration: 0.5 }}
+            className="overflow-hidden rounded-2xl border border-yellow-500/25 bg-gradient-to-b from-yellow-50/80 to-white shadow-sm"
+          >
+            <div className="flex items-center gap-2.5 border-b border-yellow-500/20 px-5 py-3.5">
+              <span className="flex h-8 w-8 items-center justify-center rounded-lg border border-yellow-200 bg-yellow-50 text-yellow-700">
+                <Sparkles size={16} aria-hidden="true" />
+              </span>
+              <div>
+                <div className="text-sm font-semibold text-zinc-900">AI Summary</div>
+                <div className="text-[11px] text-zinc-500">Generated from the full transcript • cached per video</div>
+              </div>
+            </div>
+            <div className="p-5">
+              <p className="text-sm font-semibold text-zinc-900">TL;DR</p>
+              <p className="mt-1.5 text-sm leading-relaxed text-zinc-600">
+                Backpropagation carries gradients backward through each layer so every weight learns from its mistakes; learning rates decide how big each step is — too large and training diverges.
+              </p>
+              <ul className="mt-4 space-y-2">
+                {[
+                  ['Key Points', 'every idea, argument & step — nothing skipped'],
+                  ['Main Topics', 'themes in the order they appear'],
+                  ['Actionable Takeaways', 'things you can apply today'],
+                  ['Notable Quotes', 'verbatim moments worth saving'],
+                ].map(([t, b]) => (
+                  <li key={t} className="flex items-start gap-2.5 rounded-lg border border-black/10 bg-white px-3 py-2">
+                    <Check size={15} className="mt-0.5 shrink-0 text-emerald-600" aria-hidden="true" />
+                    <span className="text-xs text-zinc-600"><span className="font-semibold text-zinc-900">{t}</span> — {b}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </motion.div>
+
+          {/* Ask-this-video panel */}
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: '-60px' }}
+            variants={fadeUp}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="overflow-hidden rounded-2xl border border-cyan-600/25 bg-gradient-to-b from-cyan-50/70 to-white shadow-sm"
+          >
+            <div className="flex items-center gap-2.5 border-b border-cyan-600/20 px-5 py-3.5">
+              <span className="flex h-8 w-8 items-center justify-center rounded-lg border border-cyan-100 bg-cyan-50 text-cyan-700">
+                <MessageCircle size={16} aria-hidden="true" />
+              </span>
+              <div>
+                <div className="text-sm font-semibold text-zinc-900">Ask This Video</div>
+                <div className="text-[11px] text-zinc-500">Transcript-grounded Q&A • streams live</div>
+              </div>
+            </div>
+            <div className="space-y-2.5 p-5">
+              <div className="ml-auto w-fit max-w-[85%] rounded-2xl rounded-br-md bg-zinc-900 px-3.5 py-2 text-sm text-white">
+                What does the speaker say about learning rates?
+              </div>
+              <div className="mr-auto w-fit max-w-[92%] rounded-2xl rounded-bl-md border border-black/10 bg-white px-3.5 py-2.5 text-sm leading-relaxed text-zinc-700 shadow-sm">
+                Keep them small early — large steps overshoot the minimum and the loss explodes.{' '}
+                <span className="whitespace-nowrap rounded bg-cyan-100 px-1.5 py-0.5 font-mono text-[11px] font-semibold text-cyan-800">[02:31]</span>{' '}
+                Annealing the rate later is what lets it settle.
+              </div>
+              <div className="ml-auto w-fit max-w-[85%] rounded-2xl rounded-br-md bg-zinc-900 px-3.5 py-2 text-sm text-white">
+                Any quote worth saving?
+              </div>
+              <div className="mr-auto w-fit max-w-[92%] rounded-2xl rounded-bl-md border border-black/10 bg-white px-3.5 py-2.5 text-sm leading-relaxed text-zinc-700 shadow-sm">
+                &ldquo;If you can read the diagram, you can debug the model.&rdquo;{' '}
+                <span className="whitespace-nowrap rounded bg-cyan-100 px-1.5 py-0.5 font-mono text-[11px] font-semibold text-cyan-800">[11:20]</span>
+              </div>
+              <ul className="flex flex-wrap gap-x-4 gap-y-1.5 pt-1 text-xs text-zinc-600">
+                {['Answers only from this transcript', 'Clickable timestamps jump to the moment', 'Stop & re-ask anytime'].map((t) => (
+                  <li key={t} className="flex items-center gap-1.5">
+                    <Check size={13} className="text-emerald-600" aria-hidden="true" /> {t}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* HOW IT WORKS */}
       <section id="how" className="scroll-mt-20 border-y border-black/10 bg-gray-50" aria-labelledby="how-heading">
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
@@ -467,7 +594,7 @@ export default function App() {
             {[
               { n: '01', icon: ClipboardPaste, title: 'Paste URL', body: 'Drop any YouTube link into your workspace — watch, Shorts, embed, or live.' },
               { n: '02', icon: DatabaseZap, title: 'Extract & Save', body: 'Local Rust engine fetches the transcript directly into your Neon folder in seconds.' },
-              { n: '03', icon: BookOpenText, title: 'Read & Export', body: 'Read clean, copy text with one click, or export a print-ready PDF.' },
+              { n: '03', icon: BookOpenText, title: 'Summarize, Ask & Export', body: 'Get the AI summary, chat with the video, read clean, copy text with one click, or export a print-ready PDF.' },
             ].map((s, i) => (
               <motion.div
                 key={s.n}
@@ -581,7 +708,7 @@ export default function App() {
             <nav aria-label="Product links">
               <h3 className="text-xs font-semibold uppercase tracking-wider text-zinc-500">Product</h3>
               <ul className="mt-3 space-y-2 text-sm">
-                {[['Features', '#features'], ['How It Works', '#how'], ['Reader', '#reader'], ['Download', '#download']].map(([l, h]) => (
+                {[['Features', '#features'], ['AI', '#ai'], ['How It Works', '#how'], ['Reader', '#reader'], ['Download', '#download']].map(([l, h]) => (
                   <li key={h}><a href={h} className="text-zinc-600 hover:text-zinc-900">{l}</a></li>
                 ))}
               </ul>
